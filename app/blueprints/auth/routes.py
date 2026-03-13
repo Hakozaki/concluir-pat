@@ -26,17 +26,22 @@ def login():
         try:
             response = http_client.post(api_url, json_data=payload, timeout=5)
             if response.status_code == 200:
-
-                data = response.json()
-                # Salva o token da estrutura data.authorization.token conforme solicitado
-                token = data.get("authorization", {}).get("token")
+                json_resp = response.json()
+                # O caminho correto conforme o log é: data -> authorization -> token
+                data_obj = json_resp.get("data", {})
+                token = data_obj.get("authorization", {}).get("token")
+                
+                if not token:
+                    # Fallbacks caso mude futuramente
+                    token = data_obj.get("token") or json_resp.get("token")
                 
                 if token:
                     session["auth_token"] = token
                     session["usuario"] = username
                     flash("Login realizado com sucesso!", "success")
-                    return redirect(url_for("main.index"))
+                    return redirect(url_for("main.dashboard"))
                 else:
+                    current_app.logger.error(f"Token não encontrado na resposta: {json_resp}")
                     flash("Erro ao processar token de autenticação.", "error")
             else:
 

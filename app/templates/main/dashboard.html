@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Concluir PAT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <nav class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-blue-600">Concluir PAT</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-slate-600">Olá, <span class="font-medium text-slate-900">{{ session.get('usuario', 'Usuário') }}</span></span>
+                    <a href="{{ url_for('auth.logout') }}" class="text-sm font-medium text-rose-600 hover:text-rose-700">Sair</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+            <h1 class="text-2xl font-bold text-slate-900">Dashboard de Controle</h1>
+            <p class="mt-2 text-slate-500">Bem-vindo ao sistema Concluir PAT. Esta é sua página inicial de controle.</p>
+            
+            <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Placeholder cards for dashboard -->
+                <div class="p-6 bg-blue-50 rounded-xl border border-blue-100">
+                    <h3 class="font-semibold text-blue-900">Projetos Ativos</h3>
+                    <p class="text-3xl font-bold text-blue-600 mt-2">0</p>
+                </div>
+                <div class="p-6 bg-emerald-50 rounded-xl border border-emerald-100">
+                    <h3 class="font-semibold text-emerald-900">Concluídos</h3>
+                    <p class="text-3xl font-bold text-emerald-600 mt-2">0</p>
+                </div>
+                <div class="p-6 bg-amber-50 rounded-xl border border-amber-100">
+                    <h3 class="font-semibold text-amber-900">Pendentes</h3>
+                    <p class="text-3xl font-bold text-amber-600 mt-2">0</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
