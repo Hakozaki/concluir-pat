@@ -41,7 +41,7 @@ def create_app(config_name: str | None = None) -> Flask:
     @app.before_request
     def require_login():
         # Lista de rotas públicas
-        public_endpoints = ["auth.login", "static"]
+        public_endpoints = ["auth.login", "static", "api.execute_pat_full_cycle", "api.execute_pat_complete_closure"]
         
         # Ignora se for rota pública ou se não houver endpoint definido (ex: favicon)
         if not request.endpoint or request.endpoint in public_endpoints:

@@ -44,3 +44,14 @@ def get(url, params=None, **kwargs):
     except Exception as e:
         log_api_request("GET", url, payload=params, error=e)
         raise e
+
+def patch(url, json_data=None, **kwargs):
+    """Wrapper for requests.patch with automatic logging."""
+    response = None
+    try:
+        response = requests.patch(url, json=json_data, **kwargs)
+        log_api_request("PATCH", url, payload=json_data, response=response)
+        return response
+    except Exception as e:
+        log_api_request("PATCH", url, payload=json_data, error=e)
+        raise e
