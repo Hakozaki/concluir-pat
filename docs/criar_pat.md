@@ -1,4 +1,4 @@
-# Fluxo de Criação de PAT (Processo de Apoio Técnico)
+# Fluxo 1: Criação do PAT (Pedido de Apoio Técnico)
 
 ## 📖 Glossário de Domínio (Entidades e IDs)
 | Termo | Valor/ID | Descrição |
@@ -11,7 +11,9 @@
 ---
 
 ## 🛠 Especificação Técnica do Endpoint
-**Ação:** `POST /pat/create`
+**Documentação** `http://pats.sigep.docker.localhost/docs/api#/`
+**Url** `http://pats.sigep.docker.localhost`
+**Ação:** `POST /api/pats/store`
 
 ### Regras de Validação e Mock de Dados
 O fluxo deve seguir rigorosamente as regras abaixo para a criação do registro:

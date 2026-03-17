@@ -1,4 +1,4 @@
-# Fluxo de Demanda de PAT (Processo de Apoio Técnico)
+# Fluxo 2: Atribuir Demanda a um PAT (Pedido de Apoio Técnico)
 
 ## 📖 Glossário de Demandas e Setores
 | Entidade | ID | Descrição |
@@ -12,7 +12,9 @@
 ---
 
 ## 🛠 Especificação Técnica: Demandar PAT
-**Ação:** `POST /pat/demandar`
+**Documentação** `http://pats.sigep.docker.localhost/docs/api#/`
+**Url** `http://pats.sigep.docker.localhost`
+**Ação:** `POST /api/pats/demandas/store`
 
 ### Regras de Validação e Lógica de Dados
 Este fluxo associa uma demanda específica a um PAT já existente.
