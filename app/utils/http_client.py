@@ -33,3 +33,14 @@ def post(url, json_data=None, **kwargs):
     except Exception as e:
         log_api_request("POST", url, payload=json_data, error=e)
         raise e
+
+def get(url, params=None, **kwargs):
+    """Wrapper for requests.get with automatic logging."""
+    response = None
+    try:
+        response = requests.get(url, params=params, **kwargs)
+        log_api_request("GET", url, payload=params, response=response)
+        return response
+    except Exception as e:
+        log_api_request("GET", url, payload=params, error=e)
+        raise e

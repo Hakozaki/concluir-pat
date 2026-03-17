@@ -43,8 +43,32 @@ def create_app(config_name: str | None = None) -> Flask:
         # Lista de rotas públicas
         public_endpoints = ["auth.login", "static"]
         
-        # Se não estiver logado e tentar acessar algo que não é público
-        if "auth_token" not in session and request.endpoint not in public_endpoints:
+        # Ignora se for rota pública ou se não houver endpoint definido (ex: favicon)
+        if not request.endpoint or request.endpoint in public_endpoints:
+            return
+            
+        # Verifica se tem o token na sessão
+        token = session.get("auth_token")
+        if not token:
+            return redirect(url_for("auth.login"))
+
+        # Valida o token contra a API externa
+        from app.utils import http_client
+        from flask import current_app
+        
+        payload_url = current_app.config.get("SIGEP_AUTH_PAYLOAD_URL")
+        try:
+            headers = {"Authorization": f"Bearer {token}"}
+            # Se não voltar 200, o token é considerado inválido
+            response = http_client.post(payload_url, headers=headers, timeout=5)
+            
+            if response.status_code != 200:
+                current_app.logger.warning(f"Sessão encerrada: Token inválido na API externa. Status: {response.status_code}")
+                session.clear()
+                return redirect(url_for("auth.login"))
+        except Exception as e:
+            current_app.logger.error(f"Erro ao validar token na API externa: {e}")
+            session.clear()
             return redirect(url_for("auth.login"))
 
     return app

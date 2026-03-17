@@ -46,7 +46,7 @@ def login():
             else:
 
                 flash("Credenciais inválidas ou erro no servidor de autenticação.", "error")
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             current_app.logger.error(f"Erro ao conectar com a API de auth: {e}")
             flash("Sistema de autenticação indisponível no momento.", "error")
             

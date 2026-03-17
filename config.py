@@ -10,7 +10,9 @@ class Config:
     """Configuração base."""
     SECRET_KEY: str = os.environ.get("SECRET_KEY", "dev-secret-key")
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
-    SIGEP_AUTH_API_URL: str = os.environ.get("SIGEP_AUTH_API_URL", "http://auth.sigep.docker.localhost/api/auth/login")
+    SIGEP_AUTH_API_URL: str = os.environ.get("SIGEP_AUTH_API_URL", "http://auth.sigep.docker.localhost")
+    SIGEP_AUTH_PAYLOAD_URL: str = os.environ.get("SIGEP_AUTH_PAYLOAD_URL", "http://auth.sigep.docker.localhost/api/auth/payload")
+    SIGEP_DATA_API_URL: str = os.environ.get("SIGEP_DATA_API_URL", "http://data.laravel.sigep.docker.localhost")
 
 
     @staticmethod
